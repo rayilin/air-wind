@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<title>空氣可以被壓縮</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  :root{ --ground:#0f2b23; --ink:#f2fbf6; --mint:#7fe0b0; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--ground);font-family:'Microsoft JhengHei',sans-serif}
+  #root{width:100%;height:100%;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 80% 15%, #1d4a39 0%, #0f2b23 58%, #0b1f1a 100%)}
+  .frame{position:absolute;inset:0;padding:80px 110px;display:flex;flex-direction:column}
+  .kicker{font-size:30px;letter-spacing:.22em;color:var(--mint);font-weight:700}
+  h1{font-size:92px;line-height:1.1;color:var(--ink);font-weight:900;margin-top:14px}
+  .stage{position:relative;flex:1;margin-top:20px}
+  .barrel{position:absolute;left:430px;top:230px;width:900px;height:260px;
+    border:12px solid var(--ink);border-radius:16px;background:rgba(255,255,255,.06)}
+  .tip{position:absolute;left:360px;top:310px;width:80px;height:100px;background:var(--ink);border-radius:10px 0 0 10px}
+  .plunger{position:absolute;left:1240px;top:230px;width:520px;height:260px}
+  .rod{position:absolute;left:0;top:96px;width:330px;height:28px;background:var(--mint);border-radius:6px}
+  .pad{position:absolute;left:0;top:10px;width:44px;height:240px;background:var(--ink);border-radius:8px}
+  .dot{position:absolute;width:26px;height:26px;border-radius:50%;background:#bfe8ff}
+  .cap{position:absolute;left:110px;right:110px;bottom:26px;font-size:42px;color:var(--ink);font-weight:700;text-align:center;opacity:0}
+  .cap b{color:var(--mint)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="p06" data-start="0" data-duration="14.4" data-width="1920" data-height="1080">
+  <div class="clip" data-start="0" data-duration="14.4" data-track-index="0">
+    <div class="frame">
+      <div class="kicker">空氣與風 · 概念 3</div>
+      <h1>空氣可以被壓縮</h1>
+      <div class="stage">
+        <div class="tip"></div>
+        <div class="barrel" id="barrel">
+          <div class="dot" id="d1" style="left:120px;top:110px"></div>
+          <div class="dot" id="d2" style="left:230px;top:70px"></div>
+          <div class="dot" id="d3" style="left:340px;top:120px"></div>
+          <div class="dot" id="d4" style="left:450px;top:80px"></div>
+          <div class="dot" id="d5" style="left:560px;top:120px"></div>
+          <div class="dot" id="d6" style="left:300px;top:160px"></div>
+        </div>
+        <div class="plunger" id="plunger">
+          <div class="rod"></div>
+          <div class="pad"></div>
+        </div>
+      </div>
+      <p class="cap" id="cap1">堵住出口，用力推——<b>推得下去</b></p>
+      <p class="cap" id="cap2">空氣被壓縮，體積變小；放開就彈回來</p>
+    </div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#plunger", { x: 0 }, { x: -430, duration: 2.6, ease: "power2.inOut" }, 1.0)
+    .fromTo(["#d1","#d2","#d3","#d4","#d5","#d6"], { scale: 1 }, { scale: 0.72, x: 90, duration: 2.6, ease: "power2.inOut", stagger: 0.04 }, 1.0)
+    .fromTo("#cap1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 1.4)
+    .fromTo("#plunger", { x: -430 }, { x: 0, duration: 2.2, ease: "power2.out" }, 6.0)
+    .fromTo(["#d1","#d2","#d3","#d4","#d5","#d6"], { scale: 0.72, x: 90 }, { scale: 1, x: 0, duration: 2.2, ease: "power2.out", stagger: 0.04 }, 6.0)
+    .fromTo("#cap1", { opacity: 1 }, { opacity: 0, duration: 0.4 }, 6.0)
+    .fromTo("#cap2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 6.4);
+  window.__timelines["p06"] = tl;
+  tl.seek(0);
+</script>
+</body>
+</html>
+

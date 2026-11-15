@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<title>空氣流動形成風</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  :root{ --ground:#0f2b23; --ink:#f2fbf6; --mint:#7fe0b0; --warm:#ffb74d; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--ground);font-family:'Microsoft JhengHei',sans-serif}
+  #root{width:100%;height:100%;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 50% 10%, #20503e 0%, #0f2b23 60%, #0b1f1a 100%)}
+  .frame{position:absolute;inset:0;padding:80px 110px;display:flex;flex-direction:column}
+  .kicker{font-size:30px;letter-spacing:.22em;color:var(--mint);font-weight:700}
+  h1{font-size:92px;line-height:1.1;color:var(--ink);font-weight:900;margin-top:14px}
+  .stage{position:relative;flex:1;margin-top:26px}
+  .zone{position:absolute;top:120px;width:420px;height:300px;border-radius:24px;border:8px solid rgba(242,251,246,.7);
+    display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:800}
+  .high{left:120px;background:rgba(255,183,77,.18);color:var(--warm)}
+  .low{right:120px;background:rgba(79,195,247,.16);color:#9fe0ff}
+  .arrow{position:absolute;top:250px;font-size:64px;color:var(--mint);opacity:0}
+  .paper{position:absolute;left:880px;top:470px;width:160px;height:110px;background:#f7fbf6;border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .paper::after{content:'';position:absolute;left:12px;top:16px;right:12px;bottom:16px;
+    border-top:4px solid #cfe3d6;border-bottom:4px solid #cfe3d6}
+  .cap{position:absolute;left:110px;right:110px;bottom:26px;font-size:42px;color:var(--ink);font-weight:700;text-align:center;opacity:0}
+  .cap b{color:var(--mint)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="p08" data-start="0" data-duration="12.8" data-width="1920" data-height="1080">
+  <div class="clip" data-start="0" data-duration="12.8" data-track-index="0">
+    <div class="frame">
+      <div class="kicker">空氣與風 · 概念 4</div>
+      <h1>空氣流動，就形成風</h1>
+      <div class="stage">
+        <div class="zone high">壓力大</div>
+        <div class="zone low">壓力小</div>
+        <div class="arrow" id="a1" style="left:660px">→</div>
+        <div class="arrow" id="a2" style="left:800px">→</div>
+        <div class="arrow" id="a3" style="left:940px">→</div>
+        <div class="paper" id="paper"></div>
+      </div>
+      <p class="cap" id="cap1">空氣從<b>壓力大</b>的地方，往<b>壓力小</b>的地方移動</p>
+      <p class="cap" id="cap2">移動的空氣，就是我們感覺到的風</p>
+    </div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo(["#a1","#a2","#a3"], { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 1.0, stagger: 0.25, ease: "power1.out" }, 1.0)
+    .fromTo("#cap1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 1.6)
+    .fromTo("#a1", { x: 0 }, { x: 260, duration: 1.4, ease: "power1.inOut" }, 3.2)
+    .fromTo("#a2", { x: 0 }, { x: 260, duration: 1.4, ease: "power1.inOut" }, 3.5)
+    .fromTo("#a3", { x: 0 }, { x: 260, duration: 1.4, ease: "power1.inOut" }, 3.8)
+    .fromTo("#paper", { rotation: -6 }, { rotation: 10, duration: 1.6, yoyo: true, repeat: 3, ease: "sine.inOut" }, 5.0)
+    .fromTo(["#a1","#a2","#a3"], { opacity: 1 }, { opacity: 0, duration: 0.5 }, 8.6)
+    .fromTo("#cap1", { opacity: 1 }, { opacity: 0, duration: 0.4 }, 8.8)
+    .fromTo("#cap2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 9.0);
+  window.__timelines["p08"] = tl;
+  tl.seek(0);
+</script>
+</body>
+</html>
+

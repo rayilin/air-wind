@@ -1,0 +1,72 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<title>風向與風力</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<style>
+  :root{ --ground:#0f2b23; --ink:#f2fbf6; --mint:#7fe0b0; --warm:#ffb74d; --sky:#9fe0ff; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1920px;height:1080px;overflow:hidden;background:var(--ground);font-family:'Microsoft JhengHei',sans-serif}
+  #root{width:100%;height:100%;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 30% 20%, #1d4a39 0%, #0f2b23 58%, #0b1f1a 100%)}
+  .frame{position:absolute;inset:0;padding:80px 110px;display:flex;flex-direction:column}
+  .kicker{font-size:30px;letter-spacing:.22em;color:var(--mint);font-weight:700}
+  h1{font-size:88px;line-height:1.1;color:var(--ink);font-weight:900;margin-top:14px}
+  .stage{position:relative;flex:1;margin-top:10px}
+  .compass{position:absolute;left:120px;top:40px;width:460px;height:460px;border-radius:50%;
+    border:10px solid rgba(242,251,246,.55)}
+  .dir{position:absolute;font-size:34px;font-weight:800;color:var(--ink);opacity:.85}
+  .vane{position:absolute;left:230px;top:270px;width:220px;height:14px;background:var(--warm);
+    border-radius:8px;transform-origin:0 50%}
+  .vane::after{content:'';position:absolute;right:-4px;top:-16px;border-left:36px solid var(--warm);
+    border-top:23px solid transparent;border-bottom:23px solid transparent}
+  .scale{position:absolute;left:720px;top:70px;width:1050px}
+  .row{display:flex;align-items:center;gap:26px;margin-bottom:34px}
+  .lbl{width:150px;font-size:34px;font-weight:800;color:var(--ink)}
+  .bar{height:34px;border-radius:10px;background:linear-gradient(90deg,var(--mint),var(--sky))}
+  .b1{width:220px}.b2{width:480px}.b3{width:760px;background:linear-gradient(90deg,var(--warm),#e8643a)}
+  .cap{position:absolute;left:110px;right:110px;bottom:26px;font-size:42px;color:var(--ink);font-weight:700;text-align:center;opacity:0}
+  .cap b{color:var(--mint)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="p11" data-start="0" data-duration="13.2" data-width="1920" data-height="1080">
+  <div class="clip" data-start="0" data-duration="13.2" data-track-index="0">
+    <div class="frame">
+      <div class="kicker">空氣與風 · 概念 5</div>
+      <h1>風向與風力</h1>
+      <div class="stage">
+        <div class="compass" id="compass">
+          <div class="dir" style="left:50%;top:14px;margin-left:-14px">北</div>
+          <div class="dir" style="right:20px;top:50%;margin-top:-20px">東</div>
+          <div class="dir" style="left:50%;bottom:14px;margin-left:-14px">南</div>
+          <div class="dir" style="left:22px;top:50%;margin-top:-20px">西</div>
+          <div class="vane" id="vane"></div>
+        </div>
+        <div class="scale">
+          <div class="row"><div class="lbl">微風</div><div class="bar b1" id="b1"></div></div>
+          <div class="row"><div class="lbl">有風</div><div class="bar b2" id="b2"></div></div>
+          <div class="row"><div class="lbl">強風</div><div class="bar b3" id="b3"></div></div>
+        </div>
+      </div>
+      <p class="cap" id="cap1">箭頭指著<b>風吹來的方向</b>——這就是風向</p>
+      <p class="cap" id="cap2">風越強，風力越大；強風時要小心安全</p>
+    </div>
+  </div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#vane", { rotation: -90 }, { rotation: -35, duration: 2.2, ease: "power2.inOut" }, 0.8)
+    .fromTo("#cap1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 1.4)
+    .fromTo("#b1", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out", transformOrigin: "left center" }, 4.4)
+    .fromTo("#b2", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out", transformOrigin: "left center" }, 5.0)
+    .fromTo("#b3", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out", transformOrigin: "left center" }, 5.6)
+    .fromTo("#cap1", { opacity: 1 }, { opacity: 0, duration: 0.4 }, 7.4)
+    .fromTo("#cap2", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 7.8);
+  window.__timelines["p11"] = tl;
+  tl.seek(0);
+</script>
+</body>
+</html>
+
