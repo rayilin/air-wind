@@ -738,10 +738,10 @@ function choose(k, btn){
 function showResult(){
   const pct = score;
   let msg, sub;
-  if (pct >= 80){ msg = '植物小達人！'; sub = '根莖葉花果實種子，你全都掌握了。'; }
+  if (pct >= 80){ msg = '空氣小達人！'; sub = '空氣的特性、風向與風力，你全都掌握了。'; }
   else if (pct >= 60){ msg = '很厲害！'; sub = '再複習錯的那幾題，就滿分了。'; }
-  else if (pct >= 40){ msg = '不錯，再加油！'; sub = '回到簡報看看各構造的功能，再挑戰一次。'; }
-  else { msg = '再來一次！'; sub = '先看一遍簡報 p3–p18，你會發現簡單很多。'; }
+  else if (pct >= 40){ msg = '不錯，再加油！'; sub = '回到簡報看看空氣的三個特性與風的形成，再挑戰一次。'; }
+  else { msg = '再來一次！'; sub = '先看一遍簡報 p3–p15，你會發現簡單很多。'; }
 
   qBox.innerHTML =
     '<div class="result">' +

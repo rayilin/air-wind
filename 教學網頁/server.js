@@ -1,6 +1,6 @@
 'use strict';
 /**
- * 植物生長對戰：區網配對伺服器
+ * 空氣和風對戰：區網配對伺服器
  * 啟動：node server.js（或雙擊 start-battle.bat）
  * 不需要任何 npm 套件，使用 Node 內建模組。
  */
@@ -606,7 +606,7 @@ server.listen(PORT, '0.0.0.0', () => {
   });
 
   console.log('');
-  console.log('  植物生長對戰伺服器已啟動');
+  console.log('  空氣和風對戰伺服器已啟動');
   console.log('  ─────────────────────────────');
   console.log('  教學網頁：http://localhost:' + PORT + '/');
   console.log('  學生入口：http://localhost:' + PORT + '/battle.html');
