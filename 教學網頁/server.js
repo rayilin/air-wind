@@ -16,7 +16,32 @@ const TOTAL = 10;
 const QUESTION_MS = 20000;
 const OFFLINE_GRACE_MS = 15000;
 
-const QUESTIONS = JSON.parse(fs.readFileSync(path.join(ROOT, 'questions.json'), 'utf8'));
+/** 題庫位置：環境變數 > Render Secret File > 同資料夾 questions.json */
+function loadQuestions() {
+  const candidates = [
+    process.env.QUESTIONS_FILE,
+    '/etc/secrets/questions.json',
+    path.join(ROOT, 'questions.json'),
+  ].filter(Boolean);
+  for (const file of candidates) {
+    try {
+      if (fs.existsSync(file)) {
+        console.log('[battle] 載入題庫：' + file);
+        return JSON.parse(fs.readFileSync(file, 'utf8'));
+      }
+    } catch (err) {
+      console.error('[battle] 題庫讀取失敗 ' + file + '：' + err.message);
+    }
+  }
+  if (process.env.QUESTIONS_JSON_B64) {
+    console.log('[battle] 載入題庫：QUESTIONS_JSON_B64');
+    return JSON.parse(Buffer.from(process.env.QUESTIONS_JSON_B64, 'base64').toString('utf8'));
+  }
+  console.error('找不到題庫（questions.json）；雲端請設 Secret File 或 QUESTIONS_JSON_B64。');
+  process.exit(1);
+}
+
+const QUESTIONS = loadQuestions();
 if (!Array.isArray(QUESTIONS) || QUESTIONS.length < TOTAL) {
   console.error('questions.json 題庫不足，至少需要 ' + TOTAL + ' 題。');
   process.exit(1);

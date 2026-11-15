@@ -1,6 +1,7 @@
-.venv/
+﻿.venv/
 __pycache__/
 *.pyc
 scripts/
 Thumbs.db
 desktop.ini
+教學網頁/questions.json

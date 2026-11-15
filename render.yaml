@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: air-wind-battle
+    runtime: node
+    plan: free
+    rootDir: 教學網頁
+    buildCommand: echo "no build step"
+    startCommand: node server.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 22.11.0
